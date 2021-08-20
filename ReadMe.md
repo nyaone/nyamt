@@ -3,7 +3,7 @@
 > Machine translation API for NyaOne
 
 ## Requirements
-- torch
+- [torch](https://pytorch.org/get-started/locally/)
 - transformers
 - sentencepiece
 - langdetect
