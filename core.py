@@ -13,6 +13,9 @@ def translate(text, target_lang, source_lang='auto'):
     if source_lang == 'auto':
         source_lang = detect(text)
 
+    if source_lang == target_lang:
+        return text
+
     if target_lang == 'en':  # To EN
         if source_lang == 'ja':
             return translate_ja_en(text)
