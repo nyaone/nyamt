@@ -7,6 +7,9 @@ from langdetect import detect
 
 
 def translate(text, target_lang, source_lang='auto'):
+    if text == '':
+        return ''
+
     if source_lang == 'auto':
         source_lang = detect(text)
 

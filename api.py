@@ -1,4 +1,4 @@
-from flask import Flask, jsonify, request, abort
+from flask import Flask, jsonify, request, abort, redirect
 from langdetect import detect
 import os
 
@@ -15,15 +15,20 @@ except KeyError:
 app = Flask('NyaMT')
 
 
+@app.route('/', methods=['GET'])
+def get_index():
+    redirect('https://github.com/nyaone/nyamt', 302)
+
+
 @app.route('/', methods=['POST'])
 def post_translation():
-    auth_key = request.args.get('auth_key')
+    auth_key = request.form.get('auth_key')
 
     if env_auth_key != '' and auth_key != env_auth_key:
         abort(401)
 
-    text = request.args.get('text')
-    target_lang = request.args.get('target_lang').lower()
+    text = request.form.get('text')
+    target_lang = request.form.get('target_lang').lower()
     source_lang = detect(text)
     return jsonify({
         "translations": [{
